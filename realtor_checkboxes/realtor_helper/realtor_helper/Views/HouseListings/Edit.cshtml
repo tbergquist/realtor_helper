@@ -1,0 +1,187 @@
+﻿@model realtor_helper.Models.HouseListing
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>HouseListing</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @*@Html.HiddenFor(model => model.Id)*@
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group" style="visibility:hidden;height:0px;">
+            @Html.LabelFor(model => model.Features, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Features, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Features, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.Agent.AgentName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Agent.AgentName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Agent.AgentName, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.AgentName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(m => m.AgentName, (new List<SelectListItem>
+                  {
+                  new SelectListItem{ Text="Select Realty Agent"},
+                  new SelectListItem{ Text="Joe Smith"},
+                  new SelectListItem{ Text="Shannon Poe"},
+                  new SelectListItem{ Text="Albert Ricks"},
+                  new SelectListItem{ Text="Amy Denney"} }), "--Select--")
+
+
+                    @Html.ValidationMessageFor(model => model.AgentName, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.AgentName, htmlAttributes: new { @class = "col-md-offset-2 col-md-10" })
+            <div class="col-md-offset-2 col-md-10">
+                @Html.DropDownListFor(m => m.AgentName, (new List<SelectListItem>
+              {
+              new SelectListItem{ Text="Select Realty Agent"},
+              new SelectListItem{ Text="Joe Smith"},
+              new SelectListItem{ Text="Shannon Poe"},
+              new SelectListItem{ Text="Albert Ricks"},
+              new SelectListItem{ Text="Amy Denney"} }), "--Select--")
+
+
+                @Html.ValidationMessageFor(model => model.AgentName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
+        @*<div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <table>
+                    <tr>
+                        @{
+                            int cnt = 0;
+                            List<realtor_helper.ViewModels.HouseFeature> features = ViewBag.Features;
+
+                            foreach (var feature in features)
+                            {
+                                if (cnt++ % 3 == 0)
+                                {
+                                    @:</tr><tr>
+                                }
+                                @:<td>
+                                    <input type="checkbox"
+                                           name="selectedFeatures"
+                                           value="@feature.FeatureID"
+                                           @(Html.Raw(feature.Assigned ? "checked=\"checked\"" : "")) />
+                                           @:  @feature.FeatureName
+                                @:</td>
+                             }
+                             @:</tr>
+                           }
+                    </table>
+                </div>
+            </div>*@
+
+
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.Agent_ID, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Agent_ID, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Agent_ID, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.Features, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Features, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Features, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Features, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <table>
+                    <tr>@{
+                        int cnt = 0;
+                        realtor_helper.DAL.RealtorContext db = new realtor_helper.DAL.RealtorContext();
+
+                        List<realtor_helper.ViewModels.HouseFeature> features = ViewBag.Features;
+                        
+                        foreach (var feature in features.AsEnumerable().Take(features.Count))
+                        {
+                            if (cnt++ % 5 == 0)
+                            {
+                                @:</tr><tr>
+                             }
+                            @:<td>
+                                <input type="checkbox"
+                                        name="selectedFeatures"
+                                        value="@feature.FeatureID"
+                                        @(Html.Raw(feature.Assigned ? "checked=\"checked\"" : "")) />
+                                        @:  @feature.FeatureName                                      
+                             @:</td>
+                        }
+                        @:</tr>
+                      }
+                </table>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+                        }
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
